@@ -1,2 +1,2 @@
 # fitness-app
-nextJS, postgresSQL, vercel
+nextJS with Typescript, postgresSQL, vercel
