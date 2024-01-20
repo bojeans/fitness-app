@@ -3,7 +3,7 @@ import pool from "../../db/pool";
 
 const router = express.Router();
 
-router.get("/users", async (req, res) => {
+router.get("/api/users", async (req, res) => {
   try {
     const { rows } = await pool.query("SELECT * FROM users");
     res.json(rows);
