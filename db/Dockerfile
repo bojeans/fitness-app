@@ -15,3 +15,4 @@ ENV POSTGRES_PORT=$POSTGRES_PORT
 
 # Copy initialization scripts to the container
 COPY init.sql /docker-entrypoint-initdb.d/
+COPY init-users.sql /docker-entrypoint-initdb.d/
