@@ -11,12 +11,8 @@ services:
   server:
     build:
       context: ./server
-      args:
-        - PORT=${PORT}
     ports:
       - "5000:5001"
-    environment:
-      PORT: ${PORT}  
     depends_on:
       - db
 
