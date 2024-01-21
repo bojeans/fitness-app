@@ -8,29 +8,10 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 5001;
 
+// Middlewares
 app.use(cors());
-
-app.use(
-  "/api/users",
-  (req, res, next) => {
-    console.log("Request to /api/users");
-    next();
-  },
-  usersRouter
-);
-
-app.use(
-  "/api/test",
-  (req, res, next) => {
-    console.log("Request to /api/test");
-    next();
-  },
-  testRouter
-);
-
-app.get("/", (req, res) => {
-  res.send("Hello, this is your Express server!");
-});
+app.use("/users", usersRouter);
+app.use("/test", testRouter);
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
