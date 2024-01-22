@@ -6,7 +6,7 @@ testRouter.get("/", async (req, res) => {
   try {
     // Simulate an asynchronous operation
     const result = await new Promise((resolve) => {
-      setTimeout(() => resolve("test"), 1000);
+      setTimeout(() => resolve("this is working yay"), 1000);
     });
     console.log(result);
     res.json(result);
