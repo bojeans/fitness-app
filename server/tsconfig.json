@@ -2,11 +2,13 @@
   "compilerOptions": {
     "target": "es2018",
     "module": "commonjs",
+    "types": ["jest"],
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "outDir": "./dist"
+    "outDir": "./dist",
+    "rootDir": "./src"
   },
   "include": ["**/*.ts"],
   "exclude": ["node_modules", "dist"]
