@@ -1,5 +1,5 @@
 import { Pool } from "pg";
-import pool from "../db/pool";
+import pool from "./pool";
 
 describe("Database connection", () => {
   it("should connect to the database", async () => {
