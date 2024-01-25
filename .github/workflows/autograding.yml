@@ -16,7 +16,7 @@ jobs:
       - name: Set up Node.js (using latest stable)
         uses: actions/setup-node@v3
         with:
-          node-version: "stable"
+          node-version: "lts"
 
       - name: Install Dependencies
         run: npm install
