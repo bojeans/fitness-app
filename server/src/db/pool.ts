@@ -1,24 +1,26 @@
 import dotenv from "dotenv";
-dotenv.config();
 import { Pool, QueryResult } from "pg";
+dotenv.config();
 
-const port = process.env.POSTGRES_PORT || "5432";
+const portConverter = parseInt(process.env.POSTGRES_PORT || "5432");
 
-// console.log("PostgreSQL connection parameters:", {
-//   host: process.env.POSTGRES_HOST,
-//   user: process.env.POSTGRES_USER,
-//   port: parseInt(port, 10),
-//   password: process.env.POSTGRES_PASSWORD,
-//   database: process.env.POSTGRES_DB,
-// });
+console.log("PostgreSQL connection parameters:", {
+  host: process.env.POSTGRES_HOST,
+  user: process.env.POSTGRES_USER,
+  port: process.env.POSTGRES_PORT,
+  password: process.env.POSTGRES_PASSWORD,
+  database: process.env.POSTGRES_DB,
+});
 
 const pool = new Pool({
   host: process.env.POSTGRES_HOST,
   user: process.env.POSTGRES_USER,
-  port: parseInt(port, 10),
+  port: portConverter,
   password: process.env.POSTGRES_PASSWORD,
   database: process.env.POSTGRES_DB,
 });
+
+console.log(pool);
 
 const connectToDatabase = async () => {
   try {
@@ -30,13 +32,11 @@ const connectToDatabase = async () => {
     console.log("Found result:", result.rows);
 
     client.release();
-    pool.end();
   } catch (error) {
     console.error("Error connecting to the database:", error);
-    pool.end();
   }
 };
 
-connectToDatabase();
+connectToDatabase(); // Initiate the database connection
 
 export default pool;

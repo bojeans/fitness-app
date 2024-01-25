@@ -4,10 +4,4 @@ VALUES (1, 'John Doe', 25, 'john@example.com'),
     (2, 'Jane Doe', 23, 'jane@example.com'),
     (3, 'Joe Bloggs', 56, 'joe@example.com'),
     (4, 'Phil McCracken', 34, 'phil@example.com'),
-    (
-        5,
-        'Phillipa McCracken',
-        34,
-        'phillipa@example.com'
-    );
--- Add more users as needed
+    (5, 'Sue Smith', 43, 'sue@example.com');
