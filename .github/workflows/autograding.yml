@@ -1,0 +1,67 @@
+name: Autograding
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  autograde:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js (using latest stable)
+        uses: actions/setup-node@v3
+        with:
+          node-version: "stable"
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run TypeScript Linting
+        run: npx eslint --ext .ts .
+
+      - name: Run React Linting
+        if: ${{ contains(github.event_path, 'client/') }}
+        run: npx eslint --ext .tsx .
+
+      - name: Run Dockerfile Linting
+        run: |
+          docker run --rm -i hadolint/hadolint < Dockerfile
+
+      - name: Run Stylelint (Client)
+        if: ${{ contains(github.event_path, 'client/') }}
+        run: npx stylelint "**/*.css"
+
+      - name: Install Auth0 CLI
+        run: npm install auth0-cli
+
+      - name: Run Auth0 Security Checks
+        run: auth0 security-check --config auth0-config.json
+
+      - name: Run Jest Tests
+        if: ${{ contains(github.event_path, 'server/') }}
+        run: npm test
+
+      - name: Run Supertest
+        if: ${{ contains(github.event_path, 'server/') }}
+        run: npm run supertest
+
+      - name: React Testing Library
+        if: ${{ contains(github.event_path, 'client/') }}
+        run: npm run test
+
+      - name: Run Code Coverage
+        run: npm run coverage
+
+      - name: Run dotenv-linter
+        run: npx dotenv-linter
+
+      - name: Validate Docker Compose
+        run: docker-compose -f docker-compose.yml config
+
+      - name: Run Lighthouse (assuming it's a web application)
+        run: npx lighthouse https://fitness-app-beryl.vercel.app/
