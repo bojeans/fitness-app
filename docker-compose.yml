@@ -25,4 +25,4 @@ services:
       - "5432:5432"
     image: postgres
     env_file:
-      - ./db/.env
+      - ./server/.env
