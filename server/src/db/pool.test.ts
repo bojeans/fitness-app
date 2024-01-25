@@ -1,11 +1,13 @@
-import { Pool } from "pg";
+import { PoolClient } from "pg";
 import pool from "./pool";
 
 describe("Database connection", () => {
   it("should connect to the database", async () => {
     try {
-      const client = await pool.connect();
-      expect(client).toBeInstanceOf(Pool);
+      const client: PoolClient = await pool.connect();
+      expect(client).toHaveProperty("query");
+      expect(client).toHaveProperty("release");
+
       client.release();
     } catch (error) {
       console.error(error);

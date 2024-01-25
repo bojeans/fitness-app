@@ -18,8 +18,7 @@ services:
     depends_on:
       - db
     environment:
-      - DOCKER_ENV=true
-      - PORT=${PORT} 
+      - DOCKER_ENV=true  
 
   db:
     ports:
@@ -27,9 +26,3 @@ services:
     image: postgres
     env_file:
       - ./db/.env
-    environment:
-      - POSTGRES_USER=${POSTGRES_USER}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-      - POSTGRES_DB=${POSTGRES_DB}
-      - POSTGRES_HOST=${POSTGRES_HOST}
-      - POSTGRES_PORT=${POSTGRES_PORT}   
