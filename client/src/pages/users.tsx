@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import api from "../api/api";
 
 interface User {
   id: number;
@@ -13,8 +14,8 @@ const Users = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await fetch("/users");
-        const data = await response.json();
+        const data = await api.getUsers();
+        console.log(data);
         setUsers(data);
       } catch (error) {
         console.error("Error fetching users:", error);
