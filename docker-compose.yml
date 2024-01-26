@@ -19,6 +19,8 @@ services:
       - ./server/.env  
 
   db:
+    build:
+      context: ./db  
     ports:
       - "5432:5432"
     image: postgres
