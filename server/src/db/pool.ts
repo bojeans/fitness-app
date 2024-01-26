@@ -1,6 +1,7 @@
 import dotenv from "dotenv";
 import { Pool, QueryResult } from "pg";
-dotenv.config();
+const envPath = process.env.NODE_ENV === "test" ? ".env.test" : ".env.docker";
+dotenv.config({ path: envPath });
 
 const portConverter = parseInt(process.env.POSTGRES_PORT || "5432");
 

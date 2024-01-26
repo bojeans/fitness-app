@@ -16,7 +16,7 @@ services:
     depends_on:
       - db
     env_file:
-      - ./server/.env  
+      - ./server/.env.docker  
 
   db:
     build:
@@ -25,4 +25,4 @@ services:
       - "5432:5432"
     image: postgres
     env_file:
-      - ./server/.env
+      - ./server/.env.docker
