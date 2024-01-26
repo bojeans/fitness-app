@@ -12,17 +12,17 @@ services:
     build:
       context: ./server
     ports:
-      - "5001:5001"
-    env_file:
-      - ./server/.env  
+      - "5001:5001" 
     depends_on:
       - db
-    environment:
-      - DOCKER_ENV=true  
+    env_file:
+      - ./server/.env.docker  
 
   db:
+    build:
+      context: ./db  
     ports:
       - "5432:5432"
     image: postgres
     env_file:
-      - ./db/.env
+      - ./server/.env.docker

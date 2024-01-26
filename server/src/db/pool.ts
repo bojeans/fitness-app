@@ -1,36 +1,31 @@
 import dotenv from "dotenv";
-dotenv.config();
-import { Pool } from "pg";
+import { Pool, QueryResult } from "pg";
+const envPath = process.env.NODE_ENV === "test" ? ".env.test" : ".env.docker";
+dotenv.config({ path: envPath });
 
-const port = process.env.POSTGRES_PORT || "5432";
+const portConverter = parseInt(process.env.POSTGRES_PORT || "5432");
 
-console.log("PostgreSQL connection parameters:", {
+const pool = new Pool({
   host: process.env.POSTGRES_HOST,
   user: process.env.POSTGRES_USER,
-  port: parseInt(port, 10),
+  port: portConverter,
   password: process.env.POSTGRES_PASSWORD,
   database: process.env.POSTGRES_DB,
 });
 
-console.log("All environment variables:", process.env);
+export const connectToDatabase = async () => {
+  try {
+    const client = await pool.connect();
+    const queryAllSQL = `SELECT * FROM users`;
+    const result: QueryResult = await client.query(queryAllSQL);
+    client.release();
+    return result.rows;
+  } catch (error) {
+    console.error("Error connecting to the database:", error);
+    throw error;
+  }
+};
 
-const pool = new Pool({
-  host: process.env.POSTGRES_HOST || "fitness-app-db-1",
-  user: process.env.POSTGRES_USER || "postgres",
-  port: parseInt(port, 10),
-  password: process.env.POSTGRES_PASSWORD || "password",
-  database: process.env.POSTGRES_DB || "postgres",
-});
-
-console.log(pool);
-console.log("All environment variables:", process.env);
-
-// const pool = new Pool({
-//   host: process.env.POSTGRES_HOST || "fitness-app-db-1",
-//   user: process.env.POSTGRES_USER,
-//   port: parseInt(port, 10),
-//   password: process.env.POSTGRES_PASSWORD,
-//   database: process.env.POSTGRES_DB,
-// });
+connectToDatabase();
 
 export default pool;
