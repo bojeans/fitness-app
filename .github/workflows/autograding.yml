@@ -32,6 +32,12 @@ jobs:
       - name: Build Docker images
         run: docker-compose -f docker-compose.yml build
 
+      - name: Validate OpenAPI Schema
+        uses: zalando/openapi-validator-action@v1
+        with:
+          schema_file: "https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/schemas/v3.0/schema.json"
+          openapi_file: ".openApi.yml"
+
       - name: Run TypeScript Linting
         run: npx eslint --ext .ts .
 
