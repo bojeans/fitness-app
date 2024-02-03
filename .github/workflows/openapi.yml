@@ -16,7 +16,25 @@ jobs:
       - name: Swagger UI Action
         uses: Legion2/swagger-ui-action@v1.2.0
         with:
-          yaml_files: ".openApi.yml"
+          openapi_file: ".openApi.yml"
+          config: |
+            {
+              "openapi": "3.0.0",
+              "info": {
+                "title": "Fitness App API",
+                "version": "1.0.0"
+              },
+              "servers": [
+                {
+                  "url": "http://localhost:5001",
+                  "description": "Local server"
+                }
+              ],
+              "paths": {},
+              "components": {
+                "schemas": {}
+              }
+            }
 
       - name: Validate Swagger and OpenAPI using Swagger CLI
         uses: mbowman100/swagger-validator-action@2.0
