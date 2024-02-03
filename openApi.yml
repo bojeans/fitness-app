@@ -1,0 +1,182 @@
+openapi: 3.0.0
+info:
+  title: Fitness App API
+  version: 1.0.0
+  description: API documentation for the Fitness App
+
+servers:
+  - url: http://localhost:5001 # TODO Update with production server URL
+
+paths:
+  /login:
+    post:
+      summary: User Login
+      description: Endpoint for user authentication using Auth0
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+      responses:
+        "200":
+          description: Successful login
+        "400":
+          description: Bad request
+        "401":
+          description: Unauthorized
+
+  /fitness-records:
+    get:
+      summary: Get Fitness Records
+      description: Retrieve fitness records
+      parameters:
+        - in: header
+          name: Authorization
+          schema:
+            type: string
+          required: true
+          description: JWT token obtained from Auth0
+      responses:
+        "200":
+          description: Successful retrieval
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/FitnessRecord"
+        "401":
+          description: Unauthorized
+
+    post:
+      summary: Create Fitness Record
+      description: Create a new fitness record
+      parameters:
+        - in: header
+          name: Authorization
+          schema:
+            type: string
+          required: true
+          description: JWT token obtained from Auth0
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FitnessRecord"
+      responses:
+        "201":
+          description: Fitness record created
+        "400":
+          description: Bad request
+        "401":
+          description: Unauthorized
+
+  /fitness-records/{recordId}:
+    get:
+      summary: Get Fitness Record by ID
+      description: Retrieve a fitness record by its ID
+      parameters:
+        - in: path
+          name: recordId
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Successful retrieval
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FitnessRecord"
+        "400":
+          description: Bad request
+        "401":
+          description: Unauthorized
+        "404":
+          description: Record not found
+
+    put:
+      summary: Update Fitness Record
+      description: Update an existing fitness record
+      parameters:
+        - in: path
+          name: recordId
+          required: true
+          schema:
+            type: integer
+        - in: header
+          name: Authorization
+          schema:
+            type: string
+          required: true
+          description: JWT token obtained from Auth0
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FitnessRecord"
+      responses:
+        "200":
+          description: Fitness record updated
+        "400":
+          description: Bad request
+        "401":
+          description: Unauthorized
+        "404":
+          description: Record not found
+
+    delete:
+      summary: Delete Fitness Record
+      description: Delete an existing fitness record
+      parameters:
+        - in: path
+          name: recordId
+          required: true
+          schema:
+            type: integer
+        - in: header
+          name: Authorization
+          schema:
+            type: string
+          required: true
+          description: JWT token obtained from Auth0
+      responses:
+        "204":
+          description: Fitness record deleted
+        "401":
+          description: Unauthorized
+        "404":
+          description: Record not found
+
+components:
+  schemas:
+    FitnessRecord:
+      type: object
+      properties:
+        id:
+          type: integer
+        userId:
+          type: integer
+        date:
+          type: string
+          format: date
+        exercise:
+          type: string
+        duration:
+          type: integer
+        caloriesBurned:
+          type: number
+      required:
+        - userId
+        - date
+        - exercise
+        - duration
+        - caloriesBurned
