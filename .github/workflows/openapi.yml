@@ -13,8 +13,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Generate API Documentation
-        uses: swagger-api/swagger-ui-action@v3
+      - name: Swagger UI Action
+        uses: Legion2/swagger-ui-action@v1.2.0
         with:
           yaml_files: ".openApi.yml"
 
