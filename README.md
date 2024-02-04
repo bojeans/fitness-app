@@ -12,6 +12,7 @@ A fullstack application where a user can login to record their current progress 
 
 ## Getting started
 - Once you have the project cloned, type the following from the root directory: ```docker-compose build && docker-compose up```. Note you may have to check that you don't have port conflicts. 
+- You can also execute the following command: ```npm run docker``` from the ```server folder```
 - If you don't have docker or don't wish to use it, you can ```npm install``` in both the ```server``` & ```client``` folders
 
 ## Testing
