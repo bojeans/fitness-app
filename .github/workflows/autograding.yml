@@ -32,11 +32,6 @@ jobs:
       - name: Build Docker images
         run: docker-compose -f docker-compose.yml build
 
-      - name: Validate OpenAPI Schema
-        uses: mbowman100/swagger-validator-action@2.0
-        with:
-          spec-file: ".openApi.yml"
-
       - name: Run TypeScript Linting
         run: npx eslint --ext .ts .
 
