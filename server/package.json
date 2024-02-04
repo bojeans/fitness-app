@@ -6,7 +6,8 @@
   "scripts": {
     "start": "nodemon ./dist/server.js",
     "test": "NODE_ENV=test jest",
-    "test:watch": "NODE_ENV=test jest --watch"
+    "test:watch": "NODE_ENV=test jest --watch",
+    "docker": "cd .. && docker-compose down && docker-compose up --build"
   },
   "type": "commonjs",
   "author": "",
