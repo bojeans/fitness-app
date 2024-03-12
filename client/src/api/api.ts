@@ -6,6 +6,8 @@ const http = async (url: string) => {
   return await response.json();
 };
 
-export default {
+const api = {
   getUsers: () => http(`${process.env.NEXT_PUBLIC_API_URL}/users`),
 };
+
+export default api;
