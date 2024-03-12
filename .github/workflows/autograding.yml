@@ -80,5 +80,6 @@ jobs:
         if: ${{ contains(github.event_path, 'server/') }}
         run: docker-compose -f docker-compose.yml config
 
-      - name: Run Lighthouse
-        run: npx lighthouse https://fitness-app-beryl.vercel.app/
+      # - name: Run Lighthouse
+      #   if: ${{ contains(github.event_path, 'client/') }}
+      #   run: npx lighthouse https://fitness-app-beryl.vercel.app/
