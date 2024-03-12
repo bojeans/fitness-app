@@ -8,7 +8,9 @@ services:
     depends_on:
       - server
     env_file:
-      - ./client/.env  
+      - ./client/.env
+    environment:
+      - NEXT_PUBLIC_API_URL    
 
   server:
     build:

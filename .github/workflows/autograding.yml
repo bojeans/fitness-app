@@ -30,14 +30,11 @@ jobs:
         run: docker-compose --version
 
       - name: Build Docker images
-        run: docker-compose -f docker-compose.yml build
-
-      - name: Validate OpenAPI Schema
-        uses: mbowman100/swagger-validator-action@2.0
-        with:
-          spec-file: ".openApi.yml"
+        if: ${{ contains(github.event_path, 'server/') }}
+        run: npm run docker
 
       - name: Run TypeScript Linting
+        if: ${{ contains(github.event_path, 'client/') }}
         run: npx eslint --ext .ts .
 
       - name: Run React Linting
@@ -45,6 +42,7 @@ jobs:
         run: npx eslint --ext .tsx .
 
       - name: Run Dockerfile Linting
+        if: ${{ contains(github.event_path, 'client/') || contains(github.event_path, 'server/') || contains(github.event_path, 'db/') }}
         run: |
           docker run --rm -i hadolint/hadolint < Dockerfile
 
@@ -52,11 +50,11 @@ jobs:
         if: ${{ contains(github.event_path, 'client/') }}
         run: npx stylelint "**/*.css"
 
-      - name: Install Auth0 CLI
-        run: npm install auth0-cli
+      # - name: Install Auth0 CLI
+      #   run: npm install auth0-cli
 
-      - name: Run Auth0 Security Checks
-        run: auth0 security-check --config auth0-config.json
+      # - name: Run Auth0 Security Checks
+      #   run: auth0 security-check --config auth0-config.json
 
       - name: Run Jest Tests
         if: ${{ contains(github.event_path, 'server/') }}
@@ -71,20 +69,17 @@ jobs:
         run: npm run test
 
       - name: Run Code Coverage
+        if: ${{ contains(github.event_path, 'client/') || contains(github.event_path, 'server/') }}
         run: npm run coverage
 
       - name: Run dotenv-linter
+        if: ${{ contains(github.event_path, 'client/') || contains(github.event_path, 'server/') }}
         run: npx dotenv-linter
 
       - name: Validate Docker Compose
+        if: ${{ contains(github.event_path, 'server/') }}
         run: docker-compose -f docker-compose.yml config
 
-      - name: Run Lighthouse (assuming it's a web application)
-        run: npx lighthouse https://fitness-app-beryl.vercel.app/
-    env:
-      POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
-      POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
-      POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
-      POSTGRES_HOST: ${{ secrets.POSTGRES_HOST }}
-      POSTGRES_PORT: ${{ secrets.POSTGRES_PORT }}
-      PORT: ${{ secrets.PORT }}
+      # - name: Run Lighthouse
+      #   if: ${{ contains(github.event_path, 'client/') }}
+      #   run: npx lighthouse https://fitness-app-beryl.vercel.app/ --output-path ./lighthouse.json

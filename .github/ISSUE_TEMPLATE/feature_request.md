@@ -1,3 +1,11 @@
+---
+name: Feature Request
+about: User story template and/or new Feature request
+title: "[ISSUE] "
+labels: feature-request
+assignees: ''
+---
+
 GIVEN WHEN THEN
 
 - [ ] Task 1
