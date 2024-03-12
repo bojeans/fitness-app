@@ -1,9 +1,9 @@
 ---
 name: Feature Request
 about: User story template and/or new Feature request
-title: '[Feature Request] '
+title: "[ISSUE] "
 labels: feature-request
-assignees: 
+assignees: ''
 ---
 
 GIVEN WHEN THEN
