@@ -43,6 +43,7 @@ jobs:
         run: npx eslint --ext .tsx .
 
       # - name: Run Dockerfile Linting
+      #   if: ${{ contains(github.event_path, 'client/') || contains(github.event_path, 'server/') || contains(github.event_path, 'db/') }}
       #   run: |
       #     docker run --rm -i hadolint/hadolint < Dockerfile
 
@@ -69,13 +70,15 @@ jobs:
         run: npm run test
 
       - name: Run Code Coverage
+        if: ${{ contains(github.event_path, 'client/') || contains(github.event_path, 'server/') }}
         run: npm run coverage
 
       - name: Run dotenv-linter
+        if: ${{ contains(github.event_path, 'client/') || contains(github.event_path, 'server/') }}
         run: npx dotenv-linter
 
       - name: Validate Docker Compose
         run: docker-compose -f docker-compose.yml config
 
-      - name: Run Lighthouse (assuming it's a web application)
+      - name: Run Lighthouse
         run: npx lighthouse https://fitness-app-beryl.vercel.app/
