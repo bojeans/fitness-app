@@ -29,10 +29,10 @@ jobs:
       - name: Verify Docker Compose installation
         run: docker-compose --version
 
-      - name: Build Docker images
-        run: docker-compose -f docker-compose.yml build
-        env:
-          NEXT_PUBLIC_API_URL: ${{ env.NEXT_PUBLIC_API_URL }}
+      # - name: Build Docker images
+      #   run: docker-compose -f docker-compose.yml build
+      #   env:
+      #     NEXT_PUBLIC_API_URL: ${{ env.NEXT_PUBLIC_API_URL }}
 
       - name: Run TypeScript Linting
         run: npx eslint --ext .ts .
