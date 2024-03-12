@@ -35,6 +35,7 @@ jobs:
       #     NEXT_PUBLIC_API_URL: ${{ env.NEXT_PUBLIC_API_URL }}
 
       - name: Run TypeScript Linting
+        if: ${{ contains(github.event_path, 'client/') }}
         run: npx eslint --ext .ts .
 
       - name: Run React Linting
