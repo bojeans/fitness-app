@@ -1,6 +1,7 @@
 import { render, screen, waitFor } from "@testing-library/react";
 // import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom";
+import { act } from "react-dom/test-utils";
 import Users from "../pages/users";
 import api from "../api/api";
 
@@ -23,12 +24,14 @@ describe("Users component", () => {
     // Mock api.getUsers
     (api.getUsers as jest.Mock).mockResolvedValue(users);
 
-    render(<Users />);
+    await act(async () => {
+      render(<Users />);
+    });
 
     // Wait for the Users component to re-render after the getUsers promise resolves
     await waitFor(() => {
       users.forEach(async (user) => {
-        const listItem = await screen.findAllByTestId(`user-${user.id}`);
+        const listItem = await screen.findByTestId(`user-${user.id}`);
         expect(listItem).toBeInTheDocument();
       });
     });

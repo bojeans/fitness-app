@@ -15,7 +15,6 @@ const Users = () => {
     const fetchUsers = async () => {
       try {
         const data = await api.getUsers();
-        console.log(data);
         setUsers(data);
       } catch (error) {
         console.error("Error fetching users:", error);
