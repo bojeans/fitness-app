@@ -3,6 +3,7 @@
 ## File for brainstorming functionality
 
 ### Login/Register
+![login page wireframe](../assets/login.png)
 
 #### Input/Form component
 - 2 input fields, for username and password
@@ -22,6 +23,7 @@
 ---------
 
 ### Admin Landing Page (Welcome Page)
+![admin dashboard](../assets/adminLandingPage.png)
 
 #### Mobile View
 ##### Navigation Bar
@@ -71,6 +73,8 @@
 - same as above 
 
 ### User Landing Page (Welcome Page)
+![user dashboard](../assets/userLandingPage.png)
+
 #### Mobile View
 ##### Navigation Bar
 - Hamburger Menu. involves use state/effect. 

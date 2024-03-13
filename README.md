@@ -18,3 +18,6 @@ A fullstack application where a user can login to record their current progress 
 ## Testing
 - Backend code: ```cd server```. Then you can run ```npm test``` 
 - Frontend code: coming soon (react testing library)
+
+## Layout
+- see [plan](./client/src/assets/components.md) for a breakdown of project plan
