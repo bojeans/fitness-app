@@ -8,8 +8,13 @@ interface User {
   email: string;
 }
 
+interface Error {
+  message: string;
+}
+
 const Users = () => {
   const [users, setUsers] = useState<User[]>([]);
+  const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -18,11 +23,16 @@ const Users = () => {
         setUsers(data);
       } catch (error) {
         console.error("Error fetching users:", error);
+        setError(error as Error);
       }
     };
 
     fetchUsers();
   }, []);
+
+  if (error) {
+    return <p>Error fetching users: {error.message}</p>;
+  }
 
   return (
     <div>
