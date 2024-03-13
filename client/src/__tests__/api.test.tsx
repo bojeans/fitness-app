@@ -22,4 +22,13 @@ describe("Fetch from API", () => {
       `${process.env.NEXT_PUBLIC_API_URL}/users`
     );
   });
+  it("throws an error if the response is not ok", async () => {
+    // Mock fetch to resolve with an error
+    (global.fetch as jest.Mock).mockResolvedValue({
+      ok: false,
+      status: 404,
+    });
+
+    await expect(api.getUsers()).rejects.toThrow("HTTP error! status: 404");
+  });
 });
