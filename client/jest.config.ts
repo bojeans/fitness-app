@@ -4,14 +4,10 @@
  */
 
 import type { Config } from "jest";
-import nextJest from "next/jest.js";
 
-const createJestConfig = nextJest({
-  dir: "./",
-});
 const config: Config = {
   // All imported modules in your tests should be mocked automatically
-  // automock: false,
+  automock: false,
 
   // Stop running tests after `n` failures
   // bail: 0,
@@ -32,12 +28,10 @@ const config: Config = {
   coverageDirectory: "coverage",
 
   // An array of regexp pattern strings used to skip coverage collection
-  // coveragePathIgnorePatterns: [
-  //   "/node_modules/"
-  // ],
+  coveragePathIgnorePatterns: ["/node_modules/"],
 
   // Indicates which provider should be used to instrument code for coverage
-  coverageProvider: "v8",
+  coverageProvider: "babel",
 
   // A list of reporter names that Jest uses when writing coverage reports
   // coverageReporters: [
@@ -200,4 +194,4 @@ const config: Config = {
   // watchman: true,
 };
 
-export default createJestConfig(config);
+export default config;
