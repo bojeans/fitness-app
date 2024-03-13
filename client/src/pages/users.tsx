@@ -8,7 +8,7 @@ interface User {
   email: string;
 }
 
-const Users = (url: any) => {
+const Users = () => {
   const [users, setUsers] = useState<User[]>([]);
 
   useEffect(() => {
@@ -30,7 +30,7 @@ const Users = (url: any) => {
       <h1>User List</h1>
       <ul>
         {users.map((user: User) => (
-          <li key={user.id}>
+          <li key={user.id} data-testid={`user-${user.id}`}>
             <strong>Name:</strong> {user.name}, <strong>Age:</strong> {user.age}
             , <strong>Email:</strong> {user.email}
           </li>
