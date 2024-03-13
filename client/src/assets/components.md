@@ -21,7 +21,7 @@
 
 ---------
 
-### Landing Page (Welcome Page)
+### Admin Landing Page (Welcome Page)
 
 #### Mobile View
 ##### Navigation Bar
@@ -69,3 +69,40 @@
 - same as above
 ##### Footer
 - same as above 
+
+### User Landing Page (Welcome Page)
+#### Mobile View
+##### Navigation Bar
+- Hamburger Menu. involves use state/effect. 
+- Navigatable links to other pages, such as logout. 
+
+##### Image upload
+- blank dimmed image with upload image option for user. 
+- only one image to be uploaded (consider size limit)
+- give user option to remove image, resets initial state. 
+
+##### Last logged in feature
+- need to research this, bound to be libraries. might be in a different timezone such as GMT. Do we need a user location/timezone field? 
+
+##### Description box
+- Should display 'primary goal' from Goals component.
+
+##### Graphics/Analytics
+- tbc, additional feature.  
+
+#### Tablet/Desktop View
+##### Navigation Bar
+- Home Page icon/logo in top left
+- Expanded Nav Bar aligned to right of screen with appropriate spacing. 
+##### Image upload
+- same as above. 
+
+### User Activity Page 
+- 4 options: cardio, strength, stretchs, other (strings)
+- should prompt user for the date once they select one of the above. 
+- should prompt user for a description once they enter the date. 
+- consider a truncated function to limit this text when displaying in browser. 
+
+### User Goals Page 
+- at this stage I'm thinking a 'card' to use the SMART acronym as fields. Should also have a title.
+- should have a 'primary goal(s)' feature which is rendered on users dashboard. 
