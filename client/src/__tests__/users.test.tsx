@@ -59,5 +59,32 @@ describe("Users component", () => {
     });
   });
   // Test to check for loading state
+  it("displays loading state while fetching users", async () => {
+    // Delay the resolution of getUsers
+    (api.getUsers as jest.Mock).mockImplementation(
+      () => new Promise((resolve) => setTimeout(() => resolve([]), 1000))
+    );
+
+    act(() => {
+      render(<Users />);
+    });
+
+    expect(screen.getByText("Loading...")).toBeInTheDocument();
+
+    // Clean up by unmounting the Users component
+    await act(async () => {
+      render(null);
+    });
+  });
   // Test to check if empty state (no users)
+  it("displays empty state when there are no users", async () => {
+    // Mock api.getUsers to resolve with an empty array
+    (api.getUsers as jest.Mock).mockResolvedValue([]);
+
+    await act(async () => {
+      render(<Users />);
+    });
+
+    expect(screen.getByText("No users found.")).toBeInTheDocument();
+  });
 });
