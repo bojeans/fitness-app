@@ -8,7 +8,7 @@ interface User {
   email: string;
 }
 
-const Users = () => {
+const Users = (url: any) => {
   const [users, setUsers] = useState<User[]>([]);
 
   useEffect(() => {
