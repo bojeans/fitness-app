@@ -32,3 +32,25 @@ describe("Fetch from API", () => {
     await expect(api.getUsers()).rejects.toThrow("HTTP error! status: 404");
   });
 });
+
+describe("Error Handling for Production Environment Variable", () => {
+  beforeAll(() => {
+    // Unset NEXT_PUBLIC_API_URL or set it to an unexpected value
+    delete process.env.NEXT_PUBLIC_API_URL;
+    // OR
+    process.env.NEXT_PUBLIC_API_URL = "unexpected-value";
+  });
+
+  afterAll(() => {
+    // Reset environment variable after tests
+    process.env.NEXT_PUBLIC_API_URL = "https://fitness-app-beryl.vercel.app";
+  });
+
+  it("throws an error when NEXT_PUBLIC_API_URL is undefined", async () => {
+    await expect(api.getUsers()).rejects.toThrow("API URL is not defined");
+  });
+
+  it("throws an error when NEXT_PUBLIC_API_URL is set to an unexpected value", async () => {
+    await expect(api.getUsers()).rejects.toThrow("Invalid API URL");
+  });
+});

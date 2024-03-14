@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 console.log("API URL:", process.env.NEXT_PUBLIC_API_URL);
 
 const http = async (url: string) => {
@@ -9,7 +11,15 @@ const http = async (url: string) => {
 };
 
 const api = {
-  getUsers: () => http(`${process.env.NEXT_PUBLIC_API_URL}/users`),
+  getUsers: () => {
+    if (
+      !process.env.NEXT_PUBLIC_API_URL ||
+      process.env.NEXT_PUBLIC_API_URL === "unexpected-value"
+    ) {
+      throw new Error("API URL is not defined or is invalid");
+    }
+    return http(`${process.env.NEXT_PUBLIC_API_URL}/users`);
+  },
 };
 
 export default api;
