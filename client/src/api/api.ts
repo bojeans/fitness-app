@@ -1,7 +1,9 @@
+console.log("API URL:", process.env.NEXT_PUBLIC_API_URL);
+
 const http = async (url: string) => {
   const response = await fetch(url);
   if (!response.ok) {
-    throw new Error(`HTTP error! status: ${response.status}`);
+    throw new Error(`HTTP error! status: ${response.status}, URL: ${url}`);
   }
   return await response.json();
 };
